@@ -5,3 +5,6 @@ from django.contrib.auth.models import AbstractUser
 
 class NormalUser(AbstractUser):
 	email = models.EmailField(verbose_name="email", blank=True, unique=True)
+
+	def __str__(self):
+		return f"{self.first_name} {self.last_name}"
