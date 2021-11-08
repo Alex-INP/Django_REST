@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'users',
     'corsheaders',
     'workflow',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -135,11 +136,16 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CAMEL_CASE = True
+REST_FRAMEWORK = {
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+        'PAGE_SIZE': 100,
+        'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    }
+
+CAMEL_CASE = False
 if CAMEL_CASE:
-    REST_FRAMEWORK = {
-        'DEFAULT_RENDERER_CLASSES': (
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
             'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
             'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
-        ),
-    }
+        )
+

@@ -11,8 +11,8 @@ class ProjectModelSerializer(ModelSerializer):
 		fields = "__all__"
 
 class ToDoModelSerializer(ModelSerializer):
-	project = ProjectModelSerializer().fields.get("name")
-	user = UserModelSerializer().fields.get("first_name", "last_name")
+	# project = ProjectModelSerializer().fields.get("name")
+	# user = UserModelSerializer().fields.get("first_name", "last_name")
 
 	class Meta:
 		model = ToDo
