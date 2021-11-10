@@ -6,6 +6,12 @@ import axios from "axios";
 import UserList from "./components/Users.js";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
+import ProjectList from "./components/Projects";
+import TodoList from "./components/Todos";
+import NotFound404 from "./components/NotFound404";
+import ProjectTodos from "./components/Project_Todos";
+
+import { HashRouter, Route, BrowserRouter, Link, Switch, Redirect } from "react-router-dom";
 
 class App extends React.Component{
     constructor(props) {
@@ -13,7 +19,9 @@ class App extends React.Component{
         this.state = {
             "users" : [],
             "menu_elements": [],
-            "footer_texts": []
+            "footer_texts": [],
+            "projects": [],
+            "todos": []
         }
     }
 
@@ -26,16 +34,16 @@ class App extends React.Component{
 
         const menu_elements = [
             {
-                "name": "Menu_button_1",
-                "link": "some_link_1"
+                "name": "Users",
+                "link": "/"
             },
             {
-                "name": "Menu_button_2",
-                "link": "some_link_3"
+                "name": "Projects",
+                "link": "/projects"
             },
             {
-                "name": "Menu_button_3",
-                "link": "some_link_3"
+                "name": "ToDo's",
+                "link": "/todos"
             }
 
         ];
@@ -51,18 +59,50 @@ class App extends React.Component{
                 }
             )
         }).catch(error => console.log(error))
+
+        axios.get("http://127.0.0.1:8000/api/projects/").then(response =>{
+            const projects = response.data
+        
+            this.setState(
+                {
+                    "projects": projects
+                }
+            )
+        }).catch(error => console.log(error))
+
+        axios.get("http://127.0.0.1:8000/api/todos/").then(response =>{
+            const todos = response.data
+        
+            this.setState(
+                {
+                    "todos": todos
+                }
+            )
+        }).catch(error => console.log(error))
     }
 
     render() {
         return (
             <div class="main_window">
-                <div>
-                    <Header all_menu_items={this.state.menu_elements}/>
-                </div>
-                <div>
-                    <UserList users={this.state.users}/>
-                </div>
-                <Footer footer_texts={this.state.footer_texts} />
+                <BrowserRouter>
+                    <div>
+                        <Header all_menu_items={this.state.menu_elements}/>
+                    </div>
+                    <div>
+                        <Switch>
+                            <Route exact path="/" component={() => <UserList users={this.state.users}/>}/>
+                            <Route exact path="/projects" component={() => <ProjectList projects={this.state.projects}/>}/>
+                            <Route exact path="/todos" component={() => <TodoList todos={this.state.todos}/>}/>
+                            <Route path="/project/:id"> 
+                                <ProjectTodos todos={this.state.todos}/>
+                            </Route>
+
+                            <Redirect from="/users" to ="/" />
+                            <Route component={NotFound404}/>
+                        </Switch>
+                    </div>
+                    <Footer footer_texts={this.state.footer_texts} />
+                </BrowserRouter>
             </div>
                 
         )

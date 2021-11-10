@@ -136,13 +136,19 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-        'PAGE_SIZE': 100,
-        'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-    }
+REST_FRAMEWORK = {}
 
 CAMEL_CASE = False
+DEFAULT_PAGINATION = False
+DEFAULT_FILTER = False
+
+if DEFAULT_FILTER:
+    REST_FRAMEWORK['DEFAULT_FILTER_BACKENDS'] = ['django_filters.rest_framework.DjangoFilterBackend']
+
+if DEFAULT_PAGINATION:
+    REST_FRAMEWORK['DEFAULT_PAGINATION_CLASS'] = 'rest_framework.pagination.PageNumberPagination'
+    REST_FRAMEWORK['PAGE_SIZE'] = 100
+
 if CAMEL_CASE:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
             'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
