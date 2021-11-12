@@ -26,13 +26,13 @@ router.register("users", UserCustomViewSet)
 router.register("projects", ProjectModelViewSet)
 router.register("todos", ToDoModelViewSet)
 
-filter_router = DefaultRouter()
-filter_router.register("project_filter", ProjectModelViewSet)
+# filter_router = DefaultRouter()
+# filter_router.register("project_filter", ProjectModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-    path('filter/', include(filter_router.urls))
+    # path('filter/', include(filter_router.urls))
     # path('api/projects/kwargs/<str:name>/', ProjectModelViewSet.as_view())
 ]
