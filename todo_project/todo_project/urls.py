@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 from users.views import UserCustomViewSet
 from workflow.views import ProjectModelViewSet, ToDoModelViewSet
@@ -33,6 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
+    path('api-token-auth/', obtain_auth_token)
     # path('filter/', include(filter_router.urls))
     # path('api/projects/kwargs/<str:name>/', ProjectModelViewSet.as_view())
 ]

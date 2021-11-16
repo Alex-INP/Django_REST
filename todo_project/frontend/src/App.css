@@ -88,6 +88,14 @@ td {
   text-align: center;
 }
 
+.login_menu{
+  background-color: rgb(185, 185, 185);
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 27px;
+  text-align: center;
+}
+
 
 
 
