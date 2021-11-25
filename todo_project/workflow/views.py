@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
 from .models import Project, ToDo
-from .serializers import ProjectModelSerializer, ToDoModelSerializer
+from .serializers import ProjectModelSerializer, ToDoModelSerializer, ProjectModelSerializer_version2
 from .filters import TodoTimeFilter
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
@@ -27,6 +27,11 @@ class ProjectModelViewSet(ModelViewSet):
 		if name:
 			projects = Project.objects.filter(name__contains=name)
 		return projects
+
+	def get_serializer_class(self):
+		if self.request.version == "v2.0":
+			return ProjectModelSerializer_version2
+		return ProjectModelSerializer
 
 	# def get_queryset(self):
 	# 	name = self.kwargs["name"]
