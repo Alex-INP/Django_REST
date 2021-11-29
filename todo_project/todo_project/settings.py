@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'drf_yasg',
+    'graphene_django'
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,6 @@ if CAMEL_CASE:
             'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
         )
 
+GRAPHENE = {
+    "SCHEMA":"workflow.schema.schema"
+}

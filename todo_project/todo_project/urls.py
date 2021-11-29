@@ -19,6 +19,7 @@ from rest_framework.routers import DefaultRouter, SimpleRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from graphene_django.views import GraphQLView
 
 from users.views import UserCustomViewSet
 from workflow.views import ProjectModelViewSet, ToDoModelViewSet
@@ -53,6 +54,7 @@ urlpatterns = [
     path('swagger/', schema.with_ui('swagger')),
     path('swagger<str:format>/', schema.without_ui()),
     path('redoc/', schema.with_ui('redoc')),
+    path('graphql/', GraphQLView.as_view(graphiql=True))
 
     # path('api/<str:version>/projects/', ProjectModelViewSet.as_view({"get": "list"})),
     # path('api/projects/v1', include('workflow.urls', namespace='v1.0')),
