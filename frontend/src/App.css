@@ -1,0 +1,101 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.main_window {
+  margin-left: 180px;
+  margin-right: 180px;
+  
+}
+
+.header{
+  background-color: rgb(185, 185, 185);
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  font-size: 20px;
+}
+
+.header > * {
+  color: white;
+  margin: auto;
+}
+
+table {
+  border: black 3px solid;
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  border: 3px solid black;
+}
+
+td {
+  border: 1px solid black;
+}
+
+.footer {
+  background-color: rgb(185, 185, 185);
+  font-size: 13px;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.NF404 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 60px;
+  text-align: center;
+}
+
+.login_menu{
+  background-color: rgb(185, 185, 185);
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 27px;
+  text-align: center;
+}
+
+
+
+
