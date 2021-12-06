@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:13.1
+    privileged: true
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: alex
+      POSTGRES_PASSWORD: q1wertyu
+      POSTGRES_DB: todo_project
+  backend:
+    build: ./todo_project
+    privileged: true
+    ports:
+      - 8080:8080
+    command: bash -c "
+      python manage.py migrate
+      && python manage.py add_users_db
+      && gunicorn todo_project.wsgi -b 0.0.0.0:8000
+      "
+    depends_on:
+      - db
+    nginx:
+      build: ./nginx
+      ports:
+        - 8000:80
+      depends_on:
+        - backend
+    frontend:
+      build: ./frontend
+      ports:
+        - 80:80
+      depends_on:
+        - nginx
+
